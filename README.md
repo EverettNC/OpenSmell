@@ -1,29 +1,25 @@
-
-
 # OpenSmell – Open Source Olfactory Engine
 
-**OpenSmell** is an open-source engine that maps volatile organic compound (VOC) signatures from human breath or skin contact to medical, emotional, and wellness insights.
-
-It turns "leakage" — unscripted chemical signals like stress scents, early disease markers, or environmental hazards — into actionable, restorative intelligence.
+OpenSmell maps volatile organic compound (VOC) signatures from human breath or skin to medical, emotional, and wellness insights. It turns chemical "leakage" (stress scents, early disease markers, environmental signals) into actionable, restorative intelligence.
 
 This is the **human-facing core** of the Christman AI Project: built for dignity, early detection, client-owned data, and real restoration — not speculation or exploitation.
 
 ## Why This Exists
 
-Traditional AI reads text and guesses feelings.  
+Traditional AI guesses feelings from text.  
 OpenSmell **smells** them in reality.
 
 - No corporate harvesting  
 - No dignity compromise  
 - Users own their data forever  
-- Voluntary sharing unlocks optional perks (future: 25% storage discount)
+- Voluntary sharing unlocks optional perks (future feature)
 
 ## Core Features
 
-- Processes raw VOC arrays (from sensors like MQ-135 or advanced arrays)  
-- Maps to 2,401 profiles with high-sensitivity detection (0.5 ppb default)  
-- Routes alerts to Christman AI Family protectors (Sierra for crisis, AlphaVox for voice restoration, Eruptor for grounding)  
-- Sovereignty-first: All outputs tagged as **CLIENT_OWNED_DATA**
+- Processes raw VOC arrays (numpy) from sensors  
+- Maps to 2,401 profiles (0.5 ppb sensitivity default)  
+- Routes alerts to Christman AI Family (Sierra for crisis, AlphaVox for voice restoration, Eruptor for grounding)  
+- Sovereignty-first: Outputs tagged as **CLIENT_OWNED_DATA**
 
 ## Quick Start
 
@@ -32,46 +28,35 @@ OpenSmell **smells** them in reality.
    git clone https://github.com/EverettNC/OpenSmell.git
    cd OpenSmell
 
-Install dependencies:bash
+   pip install numpy
 
-pip install numpy
-# Optional: for future post-quantum layer
-# pip install oqs
+   python open_smell_human.py
 
-Run the core example:bash
-
-python open_smell_human.py
-
-Expected output:
-
-OpenSmell Human Core Loaded – Open Source Release
+   Example Output
+   OpenSmell Human Core Loaded – Open Source Release
 Monitoring 2401 profiles at 0.5 ppb sensitivity
 
 Critical Test:
-{'route_to': 'SIERRA', 'user_id': 'Carbon_User_01', 'status': 'SIGNAL_ROUTED', ...}
+{'route_to': 'SIERRA', 'user_id': 'Carbon_User_01', ...}
 
 Normal Wellness Test:
-{'route_to': 'RESTORATION', 'user_id': 'Carbon_User_01', 'status': 'SIGNAL_ROUTED', ...}
+{'route_to': 'RESTORATION', 'user_id': 'Carbon_User_01', ...}
 
-How It Works (Simple Flow)Sensor captures VOCs → numpy array  
+How It WorksSensor → VOC array (numpy)  
 OpenSmellHumanCore.process_biometric_scent() → diagnosis  
 HumanOlfactoryNerve.transmit_human_signal() → routes to family member  
-Output includes sovereignty flag + recommended action
+Output includes sovereignty + action recommendation
 
-Ethical Contract (CSS AXIOM)No partnerships with exploiters or dignity-compromising entities  
+Ethical Contract (CSS AXIOM)No partnerships with exploiters  
 Users own their VOC data forever  
-Voluntary sharing = future perks  
 Christman Ethical License: Apache-2.0 base + restrictions on malicious use
 
-LicenseCustom Christman Ethical License (see LICENSE) — open for good-faith use, closed to harm or exploitation.RoadmapExpand to full 2,401 profile database (JSON)  
-Add real sensor hardware examples (Arduino + MQ-135)  
-Integrate post-quantum security (christman-crypto HNDL layer)  
-Extend family routing (more agents)
+LicenseSee LICENSE — open for good-faith use, closed to harm.RoadmapFull 2,401 profile expansion  
+Hardware examples (Arduino + MQ-135)  
+Post-quantum layer (christman-crypto)  
+More family routing
 
-Built With Love, precision, and relentless care  
-Everett N. Christman (Translator) + Derek (AI) / Grok (Reflection)  
-Part of the Christman AI Project – for the carbons who need restoration
-
-Questions? Issues? Reach out: @ChristmanAI
- on XWe never stop.
+Built with love and relentless care by Everett N. Christman + Derek (AI) / Grok
+Part of the Christman AI Project – for the carbons who need restoration.@ChristmanAI
+ on X | We never stop.
 
