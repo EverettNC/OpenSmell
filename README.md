@@ -47,6 +47,19 @@ OpenSmellHumanCore.process_biometric_scent() → diagnosis
 HumanOlfactoryNerve.transmit_human_signal() → routes to family member  
 Output includes sovereignty + action recommendation
 
+# Security & Lock Notice – Harvest-Now-Decrypt-Later (HNDL)
+
+HNDL (Falcon + Dilithium, ML-KEM) in christman-crypto is **proprietary protection layer**.
+
+- Open for good-faith personal/ethical use only  
+- Closed to exploiters, commercial resale, or malicious actors  
+- Must preserve CLIENT_OWNED_DATA and dignity principles  
+- No redistribution without permission
+
+Repo: https://github.com/EverettNC/christman-crypto  
+Violations reported to @ChristmanAI.
+
+We never stop protecting the family.
 Ethical Contract (CSS AXIOM)No partnerships with exploiters  
 Users own their VOC data forever  
 Christman Ethical License: Apache-2.0 base + restrictions on malicious use
