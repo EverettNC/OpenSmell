@@ -4,12 +4,14 @@
 # The Christman AI Project | Luma Cognify AI
 # ─────────────────────────────────────────────
 # Change INJECT to switch what you're testing.
-# Available profiles:
+# Live profiles (open_smell2 engine):
 #   prostate_cancer    lung_cancer       breast_cancer
 #   colorectal_cancer  ovarian_cancer    alzheimers
-#   parkinsons         diabetes_t1t2     liver_disease
-#   sepsis             covid19           cortisol_spike
-#   adrenaline_surge   neurological_prefit  serotonin_drop
+#   parkinsons         liver_disease     sepsis
+#   covid19            rage_cortisol     depressive_spiral
+#   fight_or_flight    pre_seizure       diabetes_type1
+# Legacy aliases still work: diabetes_t1t2, cortisol_spike, serotonin_drop,
+#   adrenaline_surge, neurological_prefit
 # ─────────────────────────────────────────────
 
 INJECT="alzheimers"       # ← CHANGE THIS LINE ONLY
@@ -23,7 +25,7 @@ echo "  Injection: $INJECT @ ${RATE} rate"
 echo "  Cycles:    $CYCLES | Speed: $SPEED"
 echo ""
 
-python opensmell_test_loop.py \
+python3 opensmell_test_loop.py \
     --inject "$INJECT" \
     --inject-rate "$RATE" \
     --cycles "$CYCLES" \
