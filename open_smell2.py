@@ -1,3 +1,227 @@
+Skip to main content
+
+
+OpenSmell — Simulation Validation Brief The Christman AI…
+
+
+New
+
+Customize
+Active
+
+26
+
+
+Artifacts
+Search artifacts…
+26 artifacts
+
+
+
+▸
+Your uploads
+16 · 15m ago
+
+opensmell_te
+st_loop.py
+10m ago · Claude Science
+
+
+
+
+opensm
+ell_log.csv
+52m ago
+
+
+
+
+lineage.py
+52m ago
+
+
+
+
+profiles.py
+52m ago
+
+
+
+
+alert.py
+52m ago
+
+
+
+
+opensmell_report_20260401
+_221230.txt
+52m ago
+
+
+
+
+opensmell_report_20260401
+_221530.txt
+52m ago
+
+
+
+
+opensmell_report_20260401
+_224837.txt
+52m ago
+
+
+
+
+ope
+n_smell.py
+52m ago
+
+
+
+
+opensmell_report_20260401
+_232349.txt
+52m ago
+
+
+
+
+opensmell_report_20260402
+_010942.txt
+52m ago
+
+
+
+
+opensmell_report_20260401
+_223325.txt
+52m ago
+
+
+
+
+opensmell_report_20260401
+_222405.txt
+52m ago
+
+
+
+
+opensmell_report_20260401
+_220952.txt
+52m ago
+
+
+
+
+opensmell_report_20260402
+_113241.txt
+52m ago
+
+
+
+
+
+
+onboarding-
+profile.md
+55m ago
+
+
+
+
+▸
+OpenSmell VOC Dataset Analysis Pipeline
+10 · 8m ago
+
+opensmell2_confusion_matrix.png
+opensmell2_confusion
+_matrix.png
+4m ago · Claude Science
+
+
+
+
+opensmell_calibration.png
+opensmell_cali
+bration.png
+45m ago · Claude Science
+
+
+
+
+opensmell_precision_recall.png
+opensmell_precision
+_recall.png
+45m ago · Claude Science
+
+
+
+
+opensmell_confusion_matrix.png
+opensmell_confusion
+_matrix.png
+45m ago · Claude Science
+
+
+
+
+opensmell2_labeled_exp
+eriment.csv
+4m ago · Claude Science
+
+
+
+
+opensmell2_per_profile
+_recall.csv
+4m ago · Claude Science
+
+
+
+
+opensmell_labeled_exp
+eriment.csv
+45m ago · Claude Science
+
+
+
+
+opensmell_per_profile_
+metrics.csv
+45m ago · Claude Science
+
+
+
+
+
+
+
+
+
+
+opensmell_validation
+_report.md
+45m ago · Claude Science
+
+
+
+
+open
+_smell2.py
+4m ago · Claude Science
+
+
+
+open_smell2.py
+
+
+
+
+
 """
 OpenSmell — Scent Profile Detection Engine
 
