@@ -31,6 +31,7 @@ class ScentProfile:
     confidence_threshold: float = 0.7
     references: List[str] = field(default_factory=list)
     notes: str = ""
+    research_only: bool = False  # markers not yet sensor-grounded; excluded from live matching
 
 
 # ==============================================================================
@@ -338,4 +339,120 @@ class OpenSmellLegacy:
         }
 
 
-__all__ = ["OpenSmellLegacy", "ScentProfile", "SCENT_PROFILES"]
+# ==============================================================================
+# Sensor grounding + classifier  (added: makes the profile DB actually match
+# live VOC readings from the MQ-135 / sim sensor stack)
+# ==============================================================================
+
+# Physical channels the sensor stack / simulator actually emit.
+SENSOR_CHANNELS = [
+    "acetone", "isoprene", "ammonia", "benzene", "alkanes", "aldehydes",
+    "hydrocarbons", "dimethyl_sulfide", "sulfur", "aliphatic_acids", "skatole",
+    "ketones", "sebum_vocs", "lipid_oxidation", "ethanol_trace", "toluene",
+    "ethane", "propanol", "butane", "methane_trace",
+]
+
+# Descriptive profile markers -> physical sensor channel(s). A marker absent
+# here is assumed to already BE a channel name (identity). Placeholders -> [].
+MARKER_ALIASES: Dict[str, List[str]] = {
+    "acetone_breath": ["acetone"],
+    "benzene_derivatives": ["benzene"],
+    "sulfur_compounds": ["sulfur"],
+    "specific_aldehydes": ["aldehydes"],
+    "methylated_alkanes": ["alkanes"],
+    "lipid_oxidation_byproducts": ["lipid_oxidation"],
+    "sebum_derived": ["sebum_vocs"],
+    "isopropanol": ["propanol"],
+    "butanoic_acid": ["aliphatic_acids"],
+    "isocaproic_acid": ["aliphatic_acids"],
+    "broad_high_acid_signatures": ["aliphatic_acids"],
+    "uremic_toxins": ["ammonia"],
+    "volatile_amines": ["ammonia"],
+    "under_study": [],
+    "organic_signature_under_study": [],
+}
+_PLACEHOLDER_MARKERS = {"under_study", "organic_signature_under_study"}
+
+# Flag profiles whose markers are all placeholders as research-only (kept in the
+# catalog for transparency, excluded from live matching).
+for _k, _p in SCENT_PROFILES.items():
+    if set(_p.voc_markers) <= _PLACEHOLDER_MARKERS:
+        _p.research_only = True
+
+
+def resolve_markers(markers: List[str]) -> List[str]:
+    """Map a profile's descriptive markers to physical sensor channels."""
+    out: List[str] = []
+    for m in markers:
+        if m in _PLACEHOLDER_MARKERS:
+            continue
+        for ch in MARKER_ALIASES.get(m, [m]):
+            if ch in SENSOR_CHANNELS and ch not in out:
+                out.append(ch)
+    return out
+
+
+# Pre-resolve each profile's sensor signature once (skip research-only).
+PROFILE_SIGNATURES: Dict[str, List[str]] = {
+    k: resolve_markers(p.voc_markers)
+    for k, p in SCENT_PROFILES.items()
+    if not p.research_only
+}
+
+
+def classify(
+    reading: Dict[str, float],
+    detect_threshold: float = 0.3,
+    min_confidence: float = 0.2,
+    top_n: int = 3,
+) -> List[Dict[str, Any]]:
+    """Classify a VOC reading against the sensor-grounded profile signatures.
+
+    reading: {channel_name: intensity in 0..1}. Keys starting with "__" are
+    treated as metadata and ignored.
+
+    Confidence = coverage x mean-intensity-of-matched-channels, i.e.
+        (matched / required) * (sum(intensity over matched) / matched)
+    Returns matches sorted by confidence, each above min_confidence.
+    """
+    detected = {
+        k: v for k, v in reading.items()
+        if not k.startswith("__") and isinstance(v, (int, float)) and v >= detect_threshold
+    }
+    results: List[Dict[str, Any]] = []
+    for key, signature in PROFILE_SIGNATURES.items():
+        if not signature:
+            continue
+        matched = [ch for ch in signature if ch in detected]
+        if not matched:
+            continue
+        coverage = len(matched) / len(signature)
+        mean_intensity = sum(detected[ch] for ch in matched) / len(matched)
+        confidence = round(coverage * mean_intensity, 3)
+        if confidence < min_confidence:
+            continue
+        prof = SCENT_PROFILES[key]
+        results.append({
+            "profile_key": key,
+            "condition": prof.condition,
+            "category": prof.category,
+            "severity": prof.severity,
+            "confidence": confidence,
+            "alert": confidence >= prof.confidence_threshold,
+            "matched_channels": matched,
+        })
+    results.sort(key=lambda r: r["confidence"], reverse=True)
+    return results[:top_n]
+
+
+def classify_top(reading: Dict[str, float], **kw) -> Optional[Dict[str, Any]]:
+    """Convenience: return only the single best match, or None."""
+    r = classify(reading, **kw)
+    return r[0] if r else None
+
+
+__all__ = [
+    "OpenSmellLegacy", "ScentProfile", "SCENT_PROFILES",
+    "SENSOR_CHANNELS", "MARKER_ALIASES", "PROFILE_SIGNATURES",
+    "resolve_markers", "classify", "classify_top",
+]
