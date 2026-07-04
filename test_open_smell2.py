@@ -42,10 +42,18 @@ class TestProfileSignatures(unittest.TestCase):
 
 class TestClassify(unittest.TestCase):
     def test_lung_cancer_detection(self):
-        reading = {"alkanes": 0.85, "benzene": 0.80, "aldehydes": 0.75, "isoprene": 0.1}
+        reading = {
+            "alkanes": 0.85,
+            "benzene": 0.80,
+            "aldehydes": 0.75,
+            "isoprene": 0.1,
+        }
         matches = classify(reading, top_n=10)
         keys = {m["profile_key"] for m in matches}
         self.assertIn("lung_cancer", keys)
+        lung = next(m for m in matches if m["profile_key"] == "lung_cancer")
+        self.assertGreaterEqual(lung["confidence"], 0.2)
+        # TB shares alkanes only — wins top slot on this reading (shorter signature).
         self.assertEqual(matches[0]["profile_key"], "tuberculosis")
 
     def test_diabetes_acetone_detection(self):
@@ -59,7 +67,12 @@ class TestClassify(unittest.TestCase):
         self.assertEqual(classify(reading), [])
 
     def test_metadata_keys_ignored(self):
-        reading = {"__injected__": "lung_cancer", "__patient__": {"age": 70}, "benzene": 0.80, "aldehydes": 0.75}
+        reading = {
+            "__injected__": "lung_cancer",
+            "__patient__": {"age": 70},
+            "benzene": 0.80,
+            "aldehydes": 0.75,
+        }
         top = classify_top(reading)
         self.assertIsNotNone(top)
         self.assertEqual(top["profile_key"], "lung_cancer")
@@ -77,11 +90,13 @@ class TestOpenSmellLegacy(unittest.TestCase):
         stats = engine.get_statistics()
         self.assertEqual(stats["total_scent_profiles"], len(SCENT_PROFILES))
         self.assertIn("cancer", stats["categories"])
+        self.assertEqual(stats["total_detections"], 0)
 
     def test_record_detection_threshold(self):
         engine = OpenSmellLegacy()
         record = engine.record_detection("covid19", 0.85, {"isoprene": 0.85})
         self.assertTrue(record["action_required"])
+        self.assertEqual(len(engine.get_detection_history()), 1)
 
     def test_search_by_voc(self):
         engine = OpenSmellLegacy()
@@ -93,6 +108,7 @@ class TestLoopIntegration(unittest.TestCase):
     def test_inject_alias_resolves(self):
         from opensmell_test_loop import resolve_inject_profile
         self.assertEqual(resolve_inject_profile("diabetes_t1t2"), "diabetes_type1")
+        self.assertEqual(resolve_inject_profile("alzheimers"), "alzheimers")
 
     def test_classify_vocs_delegates_to_engine(self):
         from opensmell_test_loop import classify_vocs
@@ -103,6 +119,8 @@ class TestLoopIntegration(unittest.TestCase):
     def test_injection_profiles_match_engine(self):
         from opensmell_test_loop import INJECTION_PROFILES
         self.assertEqual(set(INJECTION_PROFILES), set(PROFILE_SIGNATURES))
+        for key, spec in INJECTION_PROFILES.items():
+            self.assertEqual(spec["vocs"], PROFILE_SIGNATURES[key])
 
 
 if __name__ == "__main__":
