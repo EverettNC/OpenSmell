@@ -1,0 +1,22 @@
+profile_key,condition,n_channels,group_recall
+diabetes_type1,Diabetes (Type 1),1,0.224
+diabetes_type2,Diabetes (Type 2),1,0.234
+renal_failure,Renal Failure,1,0.369
+tuberculosis,Tuberculosis,1,0.464
+liver_disease,Liver Disease,1,0.492
+sepsis,Sepsis,1,0.525
+bladder_cancer,Bladder Cancer,2,0.768
+alzheimers,Alzheimer's Disease,1,0.787
+ovarian_cancer,Ovarian Cancer,2,0.958
+covid19,COVID-19,2,0.958
+depressive_spiral,Depressive Spiral,2,0.964
+parkinsons,Parkinson's Disease,2,0.965
+pre_seizure,Pre-Seizure / Fit Warning,2,0.972
+rage_cortisol,Rage / Cortisol Spike,2,0.973
+prostate_cancer,Prostate Cancer,2,0.975
+fight_or_flight,Fight-or-Flight Escalation,2,0.975
+breast_cancer,Breast Cancer,2,0.976
+ketoacidosis,Ketoacidosis,2,0.976
+lung_cancer,Lung Cancer,3,0.998
+colorectal_cancer,Colorectal Cancer,3,0.998
+c_diff,C. difficile,3,1.0

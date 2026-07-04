@@ -3,12 +3,14 @@
 import unittest
 
 from open_smell2 import (
+    DEGENERATE_GROUPS,
     OpenSmellLegacy,
     PROFILE_SIGNATURES,
     SCENT_PROFILES,
     classify,
     classify_top,
     resolve_markers,
+    same_group,
 )
 
 
@@ -53,8 +55,10 @@ class TestClassify(unittest.TestCase):
         self.assertIn("lung_cancer", keys)
         lung = next(m for m in matches if m["profile_key"] == "lung_cancer")
         self.assertGreaterEqual(lung["confidence"], 0.2)
-        # TB shares alkanes only — wins top slot on this reading (shorter signature).
-        self.assertEqual(matches[0]["profile_key"], "tuberculosis")
+        # Specificity-aware confidence: lung cancer matches all 3 of its channels
+        # and must outrank tuberculosis, which shares only {alkanes}. (Before the
+        # specificity fix, the shorter TB signature wrongly won this reading.)
+        self.assertEqual(matches[0]["profile_key"], "lung_cancer")
 
     def test_diabetes_acetone_detection(self):
         reading = {"acetone": 0.9, "isoprene": 0.1}
@@ -121,6 +125,57 @@ class TestLoopIntegration(unittest.TestCase):
         self.assertEqual(set(INJECTION_PROFILES), set(PROFILE_SIGNATURES))
         for key, spec in INJECTION_PROFILES.items():
             self.assertEqual(spec["vocs"], PROFILE_SIGNATURES[key])
+
+
+class TestSpecificityAndDegeneracy(unittest.TestCase):
+    """Locks in the biomarker-specificity fixes so they can't silently regress."""
+
+    def test_bladder_renal_separated(self):
+        # Bladder cancer (alkanes+aromatics) must NOT resolve to the same
+        # signature as renal failure (ammonia). Previously both were {ammonia}.
+        bladder = set(resolve_markers(SCENT_PROFILES["bladder_cancer"].voc_markers))
+        renal = set(resolve_markers(SCENT_PROFILES["renal_failure"].voc_markers))
+        self.assertTrue(bladder.isdisjoint(renal))
+
+    def test_cdiff_separated_from_sepsis(self):
+        # C. diff carries propanol + skatole (indole) on top of the acid signature.
+        cdiff = set(resolve_markers(SCENT_PROFILES["c_diff"].voc_markers))
+        sepsis = set(resolve_markers(SCENT_PROFILES["sepsis"].voc_markers))
+        self.assertNotEqual(cdiff, sepsis)
+        self.assertIn("propanol", cdiff)
+        self.assertIn("skatole", cdiff)
+
+    def test_diabetes_grouped_not_faked(self):
+        # T1/T2 share an identical acetone signature by biology; they must be
+        # declared inseparable, not given a fabricated discriminating marker.
+        self.assertEqual(
+            resolve_markers(SCENT_PROFILES["diabetes_type1"].voc_markers),
+            resolve_markers(SCENT_PROFILES["diabetes_type2"].voc_markers),
+        )
+        self.assertTrue(same_group("diabetes_type1", "diabetes_type2"))
+        self.assertFalse(same_group("diabetes_type1", "ketoacidosis"))
+        self.assertIn("diabetes_ketosis", DEGENERATE_GROUPS)
+
+    def test_specificity_multichannel_beats_subset(self):
+        # A reading matching all of lung cancer's channels must rank lung cancer
+        # above tuberculosis, which shares only {alkanes}.
+        reading = {"alkanes": 0.85, "benzene": 0.80, "aldehydes": 0.75}
+        top = classify_top(reading)
+        self.assertEqual(top["profile_key"], "lung_cancer")
+
+    def test_confidence_bounded(self):
+        # Specificity term must never push confidence above 1.0.
+        reading = {ch: 1.0 for ch in PROFILE_SIGNATURES["lung_cancer"]}
+        for match in classify(reading, top_n=10):
+            self.assertLessEqual(match["confidence"], 1.0)
+
+    def test_single_channel_noise_stays_low(self):
+        # One moderately-high channel should not clear a 0.7 alert on its own,
+        # thanks to the specificity normalization (background-rejection guard).
+        reading = {"ammonia": 0.6}
+        top = classify_top(reading)
+        if top is not None:
+            self.assertLess(top["confidence"], 0.7)
 
 
 if __name__ == "__main__":
