@@ -1,13 +1,13 @@
-Skip to main content
+#Skip to main content
 
 
-OpenSmell — Simulation Validation Brief The Christman AI…
+#OpenSmell — Simulation Validation Brief The Christman AI…
 
 
-New
+#New
 
-Customize
-Today
+#Customize
+#Today
 
 26
 
