@@ -198,7 +198,7 @@ def get_alert_action(severity: str, category: str) -> str:
 
 def get_family_targets(alert: Dict[str, Any]) -> List[str]:
     """Map severity+category to specific family members for routing."""
-    from opensmell.lineage import FAMILY_ROUTING
+    from lineage import FAMILY_ROUTING
 
     sev = alert.get("severity", "high")
     cat = alert.get("category", "behavioral")

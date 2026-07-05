@@ -33,11 +33,21 @@ import argparse
 import sys
 from datetime import datetime
 from collections import defaultdict
-from colorama import Fore, Style, init
+try:
+    from colorama import Fore, Style, init
+    init(autoreset=True)
+except ImportError:
+    class _DummyColor:
+        def __getattr__(self, _name: str) -> str:
+            return ""
+
+    Fore = Style = _DummyColor()  # type: ignore[misc, assignment]
+
+    def init(*_args, **_kwargs) -> None:
+        pass
+
 from opensmell_bio_sim import bio_simulate_sensor_reading, generate_patient_baseline
 from open_smell2 import classify, PROFILE_SIGNATURES, SCENT_PROFILES, SENSOR_CHANNELS
-
-init(autoreset=True)
 
 # Sensor-grounded injection map — same channels the classifier matches against.
 INJECTION_PROFILES = {k: {"vocs": v} for k, v in PROFILE_SIGNATURES.items()}
@@ -171,6 +181,7 @@ def detect_anomaly(matches):
             "severity":   top["severity"],
             "confidence": top["confidence"],
             "category":   top["category"],
+            "profile_id": top["profile_id"],
             "threshold":  threshold,
             "action":     get_alert_action(top["severity"], top["category"])
         }

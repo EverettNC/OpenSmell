@@ -1,0 +1,1 @@
+"""Upstream Source ingest clients for OpenSmell critical alert flow."""

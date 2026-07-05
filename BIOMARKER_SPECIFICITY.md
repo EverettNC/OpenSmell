@@ -94,7 +94,8 @@ Confidence–correctness correlation: **+0.42**. Background false-alert @0.7: **
 
 ## Tests
 
-26 unit tests pass (`python -m unittest test_open_smell2`), including guards for:
+34 unit tests pass (`python3 -m unittest test_alert_integration test_open_smell2`), including:
+alert-router integration guards (0.38 messy cycle → no route; ≥0.7 → SIERRA/DEREK), plus
 bladder/renal separation, C.diff/sepsis separation, renal/sepsis round-2 markers,
 diabetes grouping (not faked), specificity ranking, confidence bounding, and
 single-channel background rejection.
