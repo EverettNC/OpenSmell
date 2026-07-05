@@ -94,7 +94,13 @@ Confidence–correctness correlation: **+0.42**. Background false-alert @0.7: **
 
 ## Tests
 
-22 unit tests pass (`python -m unittest test_open_smell2`), including 6 new
-guards that lock in: bladder/renal separation, C.diff/sepsis separation,
+26 unit tests pass (`python -m unittest test_open_smell2`), including guards for:
+bladder/renal separation, C.diff/sepsis separation, renal/sepsis round-2 markers,
 diabetes grouping (not faked), specificity ranking, confidence bounding, and
 single-channel background rejection.
+
+## Cognitive Cortex diagram (code-aligned)
+
+Open `opensmell_cognitive_cortex.html` in a browser — generated from live engine
+stats via `python3 generate_cortex_diagram.py`. Replaces inflated "2,401 profiles"
+marketing with **21 live / 26 catalog / 20 channels** and the real classifier pipeline.

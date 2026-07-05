@@ -46,7 +46,19 @@ giving the Christman AI Family a live chemical window into the human body.
 | Sepsis | Broad high-acid signatures | CRITICAL |
 | COVID-19 | Isoprene, aldehydes | HIGH |
 
-*2,400+ scent profiles. Growing continuously.*
+***21 live sensor-grounded profiles** (26 in catalog, 5 research-only). See `VALIDATION.md` and `BIOMARKER_SPECIFICITY.md` — we do not overstate corpus size.*
+
+---
+
+## Cognitive Cortex (honest architecture diagram)
+
+```bash
+python3 generate_cortex_diagram.py   # writes opensmell_cognitive_cortex.html
+```
+
+Open the HTML in any browser — hardware (Nano + MQ-135 + fan), real classifier
+pipeline, and all **21 live profiles** pulled from `open_smell2.py`. No inflated
+2,401 count.
 
 ---
 
@@ -57,7 +69,7 @@ giving the Christman AI Family a live chemical window into the human body.
       ↓
 [$5 MQ-135 Sensor] → analog signal
       ↓
-[Arduino Uno] → serial output
+[Arduino Nano] → serial output (A0 + D9 fan PWM)
       ↓
 [OpenSmell Engine] → classify → match → anomaly detect
       ↓
