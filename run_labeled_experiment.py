@@ -36,6 +36,8 @@ def synthetic_reading(profile_key: str) -> dict[str, float]:
 
 
 def run() -> None:
+    # Pin bio-sim stochasticity so all three reviewers see identical CSVs.
+    random.seed(42)
     rows: list[dict[str, str | float | int]] = []
     per_profile_hits: Counter[str] = Counter()
     per_profile_total: Counter[str] = Counter()

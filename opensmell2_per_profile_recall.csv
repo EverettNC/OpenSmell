@@ -1,22 +1,22 @@
 profile_key,condition,n_channels,group_recall
-diabetes_type1,Diabetes (Type 1),1,0.464
-diabetes_type2,Diabetes (Type 2),1,0.466
-liver_disease,Liver Disease,1,0.645
-tuberculosis,Tuberculosis,1,0.654
-bladder_cancer,Bladder Cancer,2,0.945
-alzheimers,Alzheimer's Disease,1,0.953
-depressive_spiral,Depressive Spiral,2,0.991
-sepsis,Sepsis,3,0.992
-fight_or_flight,Fight-or-Flight Escalation,2,0.995
-covid19,COVID-19,2,0.996
+diabetes_type1,Diabetes (Type 1),1,0.373
+diabetes_type2,Diabetes (Type 2),1,0.384
+liver_disease,Liver Disease,1,0.457
+tuberculosis,Tuberculosis,1,0.793
+alzheimers,Alzheimer's Disease,1,0.883
+bladder_cancer,Bladder Cancer,2,0.915
+covid19,COVID-19,2,0.977
+fight_or_flight,Fight-or-Flight Escalation,2,0.977
+sepsis,Sepsis,3,0.984
+depressive_spiral,Depressive Spiral,2,0.987
+rage_cortisol,Rage / Cortisol Spike,2,0.992
+pre_seizure,Pre-Seizure / Fit Warning,2,0.995
 ovarian_cancer,Ovarian Cancer,2,0.996
-rage_cortisol,Rage / Cortisol Spike,2,0.996
-pre_seizure,Pre-Seizure / Fit Warning,2,0.996
-parkinsons,Parkinson's Disease,2,0.998
-breast_cancer,Breast Cancer,2,0.998
-prostate_cancer,Prostate Cancer,2,1.0
-c_diff,C. difficile,3,1.0
+prostate_cancer,Prostate Cancer,2,0.996
+breast_cancer,Breast Cancer,2,0.996
+parkinsons,Parkinson's Disease,2,0.997
+ketoacidosis,Ketoacidosis,2,0.999
 colorectal_cancer,Colorectal Cancer,3,1.0
-ketoacidosis,Ketoacidosis,2,1.0
+c_diff,C. difficile,3,1.0
 lung_cancer,Lung Cancer,3,1.0
 renal_failure,Renal Failure,3,1.0
