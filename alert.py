@@ -5,9 +5,18 @@ POST /opensmell/alert endpoint uses this. Critical detections also trigger upwar
 
 from typing import Any, Dict, List, Optional
 
-from opensmell.lineage import FAMILY_ROUTING, get_lineage_context
-from opensmell.profiles import get_family_targets
-from opensmell.upstream.ingest import OpenSmellSourceClient
+from lineage import FAMILY_ROUTING, get_lineage_context
+from open_smell2 import SCENT_PROFILES
+from profiles import get_family_targets
+from upstream.ingest import OpenSmellSourceClient
+
+DEFAULT_ALERT_THRESHOLD = 0.7
+
+
+def _resolve_threshold(profile_key: Optional[str]) -> float:
+    if profile_key and profile_key in SCENT_PROFILES:
+        return SCENT_PROFILES[profile_key].confidence_threshold
+    return DEFAULT_ALERT_THRESHOLD
 
 
 def route_alert(
@@ -19,6 +28,7 @@ def route_alert(
     trace_id: Optional[str] = None,
     session_id: Optional[str] = None,
     patient_id: Optional[str] = None,
+    profile_key: Optional[str] = None,
     do_upward: bool = True,
 ) -> Dict[str, Any]:
     """
@@ -26,7 +36,19 @@ def route_alert(
     - Computes target family members (Sierra, Derek, AlphaWolf, Eruptor, AlphaVox...).
     - For CRITICAL severity, optionally calls upward POST /source/ingest (with full lineage ancestry).
     - Always includes lineage metadata. Never bypasses declared layers.
+    - Suppresses routing when confidence is below profile threshold (default 0.7).
     """
+    threshold = _resolve_threshold(profile_key)
+    if confidence < threshold:
+        return {
+            "status": "suppressed",
+            "reason": "below_confidence_threshold",
+            "confidence": confidence,
+            "threshold": threshold,
+            "condition": condition,
+            "profile_key": profile_key,
+        }
+
     alert = {
         "triggered": True,
         "condition": condition,
@@ -96,5 +118,6 @@ def build_alert_payload_from_detection(
         category=detection.get("category", "behavioral"),
         confidence=detection.get("confidence", 0.0),
         raw_vocs=raw_reading,
+        profile_key=detection.get("profile_id") or detection.get("profile_key"),
         **kwargs,
     )
