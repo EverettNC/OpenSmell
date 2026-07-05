@@ -177,6 +177,50 @@ class TestSpecificityAndDegeneracy(unittest.TestCase):
         if top is not None:
             self.assertLess(top["confidence"], 0.7)
 
+    def test_renal_multichannel_not_ammonia_only(self):
+        renal = set(resolve_markers(SCENT_PROFILES["renal_failure"].voc_markers))
+        self.assertEqual(renal, {"ammonia", "dimethyl_sulfide", "toluene"})
+        self.assertGreater(len(renal), 1)
+
+    def test_renal_beats_ammonia_superset_profiles(self):
+        # Uremic pattern: ammonia + TMA proxy (DMS) + phenolic (toluene).
+        reading = {
+            "ammonia": 0.82,
+            "dimethyl_sulfide": 0.78,
+            "toluene": 0.74,
+            "isoprene": 0.55,
+        }
+        top = classify_top(reading)
+        self.assertIsNotNone(top)
+        self.assertEqual(top["profile_key"], "renal_failure")
+
+    def test_renal_separated_from_sepsis(self):
+        renal = set(resolve_markers(SCENT_PROFILES["renal_failure"].voc_markers))
+        sepsis = set(resolve_markers(SCENT_PROFILES["sepsis"].voc_markers))
+        self.assertNotEqual(renal, sepsis)
+        self.assertIn("toluene", renal)
+        self.assertIn("aliphatic_acids", sepsis)
+
+    def test_sepsis_distinct_from_cdiff(self):
+        sepsis = set(resolve_markers(SCENT_PROFILES["sepsis"].voc_markers))
+        cdiff = set(resolve_markers(SCENT_PROFILES["c_diff"].voc_markers))
+        self.assertNotEqual(sepsis, cdiff)
+        self.assertIn("ammonia", sepsis)
+        self.assertIn("dimethyl_sulfide", sepsis)
+        self.assertIn("propanol", cdiff)
+        self.assertIn("skatole", cdiff)
+
+    def test_sepsis_beats_breast_on_systemic_reading(self):
+        reading = {
+            "aliphatic_acids": 0.84,
+            "ammonia": 0.79,
+            "dimethyl_sulfide": 0.76,
+            "hydrocarbons": 0.52,
+        }
+        top = classify_top(reading)
+        self.assertIsNotNone(top)
+        self.assertEqual(top["profile_key"], "sepsis")
+
 
 if __name__ == "__main__":
     unittest.main(verbosity=2)

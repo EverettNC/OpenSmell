@@ -60,13 +60,34 @@ The √matched term rewards profiles that explain *more* of the signal, so lung
 cancer (`{alkanes, benzene, aldehydes}`) beats TB when all three fire, and lone
 high channels no longer clear the alert bar.
 
+## Round 2 — renal + sepsis discriminating markers
+
+The two weakest live profiles after round 1 were **renal failure** (36.9% recall)
+and **sepsis** (52.5% recall), mostly stolen by ammonia-only or acid-only
+supersets. Round 2 adds literature-grounded multi-channel signatures:
+
+| Profile | Was | Now | Grounding |
+|---------|-----|-----|-----------|
+| Renal failure | `{ammonia}` | `{ammonia, dimethyl_sulfide, toluene}` | Uremic ammonia + TMA (fishy) + phenolic aromatics on dialysis (Owlston kidney review; PLoS ONE 2012; phenol hemodialysis marker studies) |
+| Sepsis | `{aliphatic_acids}` | `{aliphatic_acids, ammonia, dimethyl_sulfide}` | Systemic sepsis acidemia + hyperammonemia + sulfur metabolites — distinct from C. diff `{acids, propanol, skatole}` (Frontiers Cell Infect Microbiol 2020; sepsis e-nose ED studies) |
+
+**Bio-sim labeled experiment (63,000 cycles, same closed-loop methodology):**
+
+| Stage | Top-1 accuracy |
+|-------|----------------|
+| Round 1 (markers + specificity score) | 78.8% |
+| **Round 2 (+ renal + sepsis markers)** | **88.7%** |
+
+Renal recall: **36.9% → 100%**. Sepsis recall: **52.5% → 99.2%**.
+Confidence–correctness correlation: **+0.42**. Background false-alert @0.7: **0%**.
+
 ## Honest limitations
 
 - Synthetic self-consistency numbers, not clinical accuracy. Real breath-VOC
   screening tops out ~85–94% sensitivity/specificity on actual samples.
-- Remaining single-channel profiles (renal, sepsis, alzheimers, bladder) still
-  confuse with conditions that superset their signature — see the confusion
-  matrix. Each needs its own discriminating marker before it is reliable.
+- **Alzheimer's** remains a single-channel profile (`lipid_oxidation`) and still
+  confuses with ketoacidosis/rage on ~12% of bio-sim cycles — needs its own
+  second marker when literature supports a distinct channel on this sensor class.
 - The MQ-135 sensor stack does not literally resolve "benzene" vs "indole" as
   named species; channel names are proxies for cross-sensitive response bands.
   Real-sample validation is required before any of this maps to biology.

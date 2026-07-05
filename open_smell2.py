@@ -152,9 +152,20 @@ SCENT_PROFILES: Dict[str, ScentProfile] = {
     "renal_failure": ScentProfile(
         condition="Renal Failure",
         category="metabolic",
-        voc_markers=["uremic_toxins"],
-        scent_description="Fishy, ammonia-like",
+        # Uremic breath is ammonia PLUS trimethylamine (fishy) AND elevated
+        # phenol/uremic aromatics on dialysis — not ammonia alone. Phenol/toluene
+        # band separates renal from fight-or-flight / pre-seizure ammonia supersets
+        # without colliding with sepsis (which carries acids + ammonia + DMS).
+        # (Owlston kidney-disease review; PLoS ONE 2012; phenol hemodialysis marker
+        # studies; BMC Nephrol 2024 CKD breath panels)
+        voc_markers=["uremic_toxins", "uremic_trimethylamine", "uremic_phenol"],
+        scent_description="Fishy-ammonia with uremic aromatic/phenolic notes",
         severity="critical",
+        references=[
+            "Owlston Medical — breath biomarkers kidney disease review",
+            "PLoS ONE 2012 — uremic volatile metabolites",
+            "BMC Nephrol 2024 — CKD breath VOC panels",
+        ],
     ),
     "ketoacidosis": ScentProfile(
         condition="Ketoacidosis",
@@ -201,9 +212,22 @@ SCENT_PROFILES: Dict[str, ScentProfile] = {
     "sepsis": ScentProfile(
         condition="Sepsis",
         category="infectious",
-        voc_markers=["broad_high_acid_signatures"],
-        scent_description="Rotten-egg, pungent organic",
+        # Sepsis is a multi-VOC systemic pattern (acidemia + hyperammonemia +
+        # sulfur metabolites), not generic aliphatic acids alone. C. diff keeps
+        # propanol + indole/skatole; sepsis carries ammonia + DMS instead.
+        # (Frontiers Cell Infect Microbiol 2020; Breath Diagnostics sepsis VOC
+        # review; electronic-nose ED sepsis recognition studies)
+        voc_markers=[
+            "broad_high_acid_signatures",
+            "sepsis_hyperammonemia",
+            "sepsis_dimethyl_sulfide",
+        ],
+        scent_description="Rotten-egg, pungent organic (acidemia + amines + sulfur)",
         severity="critical",
+        references=[
+            "Frontiers Cell Infect Microbiol 2020 — sepsis breath VOCs",
+            "Breath Diagnostics — biochemistry of sepsis-related VOCs",
+        ],
     ),
 
     # -------------------- Psychiatric / Behavioral --------------------
@@ -383,7 +407,11 @@ MARKER_ALIASES: Dict[str, List[str]] = {
     "isocaproic_acid": ["aliphatic_acids"],
     "broad_high_acid_signatures": ["aliphatic_acids"],
     "uremic_toxins": ["ammonia"],
+    "uremic_trimethylamine": ["dimethyl_sulfide"],
+    "uremic_phenol": ["toluene"],
     "volatile_amines": ["ammonia"],
+    "sepsis_hyperammonemia": ["ammonia"],
+    "sepsis_dimethyl_sulfide": ["dimethyl_sulfide"],
     # Bladder-cancer urinary VOCs: alkanes + aromatics, distinct from renal ammonia
     "bladder_alkanes": ["alkanes"],
     "bladder_aromatics": ["benzene"],
