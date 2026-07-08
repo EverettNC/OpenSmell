@@ -13,17 +13,43 @@ OpenSmell is a volatile organic compound (VOC) screening-support engine that map
 
 **Key claim for reviewers:** The continuous testing loop (`opensmell_test_loop.py`) and the production classifier (`open_smell2.py`) share a **single classification engine**. There is no parallel or divergent classifier in the simulation path.
 
-| Verified benchmark (seed 42) | Result |
+### Flagship endurance scan - July 5, 2026
+
+The largest and most realistic run to date. Unseeded, full biological noise,
+six and a half hours continuous. This is the headline result, reported exactly
+as it fell:
+
+| Flagship scan (unseeded, full noise) | Result |
 |---|---|
 | Live sensor-grounded profiles | 21 |
-| Total simulation cycles | 100 |
-| Targeted injection profile | `alzheimers` @ 50% inject rate |
-| **Injection accuracy** | **100.0%** (19 hits / 19 injected cycles) |
-| Detection rate | 99.0% |
-| Alert rate | 10.0% |
-| Duration | 3 seconds (turbo mode) |
+| Total cycles | 23,686 |
+| Duration | 6h 35m (normal speed) |
+| Detection rate | 96.19% |
+| **Injection accuracy** | **77.81%** (2,276 hits / 2,925 injected cycles) |
+| Alert rate | 2.13% (505 alerts) |
+| No-match cycles | 903 |
 
-Source report: `opensmell_report_20260704_091519.txt`
+Source report: `reports/opensmell_report_20260705_052559.txt`
+Full per-cycle data: `opensmell_log_20260705.zip` (104,453 rows)
+
+### Controlled benchmark - labeled experiment
+
+Under clean, controlled injection conditions (not the free-run noise above),
+the labeled experiment reaches higher separability:
+
+| Controlled labeled experiment | Result |
+|---|---|
+| Injected cycles | 63,000 |
+| **Top-1 accuracy** | **88.7%** |
+| Confidence-correctness correlation | +0.42 |
+| Background false-alert rate @0.7 | ~0% |
+
+Source: `BIOMARKER_SPECIFICITY.md`, `opensmell2_labeled_experiment.csv`
+
+**Read both numbers together.** Identification runs ~78% under full real-world
+noise and ~89% under controlled conditions. The harder the test, the lower the
+number - that gap is expected and is stated, not smoothed. A classifier that
+scored identically under noise and clean conditions would be the one to distrust.
 
 ---
 

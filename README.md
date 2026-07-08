@@ -41,7 +41,9 @@ giving the Christman AI Family a live chemical window into the human body.
 | Lung Cancer | Alkanes, benzene, aldehydes | CRITICAL |
 | Breast Cancer | Aliphatic acids, hydrocarbons | CRITICAL |
 | Colorectal Cancer | Ammonia, sulfur, skatole | CRITICAL |
-| Diabetes (Type 1/2) | Acetone in breath | HIGH |
+| Diabetes (Type 1) | Acetone | HIGH |
+| Diabetes (Type 2) | Acetone | HIGH |
+| Ketoacidosis | Acetone, propanol | CRITICAL |
 | Liver Disease | Dimethyl sulfide | HIGH |
 | Sepsis | Broad high-acid signatures | CRITICAL |
 | COVID-19 | Isoprene, aldehydes | HIGH |
@@ -126,8 +128,11 @@ on standard, affordable hardware.
 **Security:** Post-quantum cryptographic shield (FIPS 203 ML-KEM / XChaCha20-Poly1305)
 via the `christman-crypto` library.
 
-**Compliance:** Natively HIPAA-aware. Fully auditable CSV logging on every cycle.
-No biometric data is ever sold, shared, or harvested.
+**Status:** Not FDA-approved. Not a clinical diagnostic device. Screening-support
+software only. Built to a HIPAA-aware standard (auditable CSV logging every cycle,
+client-owned data), but no clinical or regulatory certification is claimed.
+No biometric data is ever sold, shared, or harvested. See `VALIDATION.md` for the
+full regulatory and ethical position.
 
 ---
 

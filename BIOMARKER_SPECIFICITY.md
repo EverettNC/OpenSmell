@@ -14,6 +14,12 @@ adding profiles that share VOC channels, without adding *discriminating* markers
 makes conditions collide. This round fixed that with literature-grounded
 biomarkers and a specificity-aware confidence score.
 
+> **Where this fits:** The **flagship run** is the July 5, 2026 endurance scan
+> (23,686 cycles, unseeded, full noise; 96.19% detection, 77.81% injection accuracy) -
+> see `VALIDATION.md`. The 88.7% below is the **controlled-conditions** benchmark
+> from the labeled experiment. Both are real; the controlled number is higher
+> because the test is cleaner. Neither is clinical accuracy.
+
 ## Headline (labeled synthetic data, 63,000 injected cycles)
 
 | Stage | Top-1 accuracy |
