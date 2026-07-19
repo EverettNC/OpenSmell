@@ -34,19 +34,7 @@ OpenSmell is **screening-support software** that:
 
 ---
 
-## Prohibited claims (outbound and product UI)
 
-Do **not** state or imply, in any language or medium:
-
-1. That OpenSmell **diagnoses** cancer, infection, neurological disease, or any condition  
-2. That simulation accuracy **is** clinical sensitivity/specificity  
-3. That the system is **FDA approved**, CE marked, or cleared (until true)  
-4. That MQ-135-class sensors **chemically identify named species** (e.g. “benzene”) as GC-MS would — channels are **proxy bands**  
-5. That there are **2,401** (or similar inflated) live profiles — live set is **21**  
-6. That diabetes type 1 and type 2 are **VOC-separated** — they are grouped as ketosis when inseparable  
-7. That alert routing **treats** or **medically intervenes** without a human and appropriate clinical process  
-
----
 
 ## Allowed claims (when true and sourced)
 
