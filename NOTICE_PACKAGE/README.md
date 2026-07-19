@@ -28,6 +28,7 @@ Listen to the body **chemically, early**. Volatile organic compound (VOC) signal
 | 8 | `docs/CLAIM_LOCK.md` | Allowed public numbers only |
 | 9 | `docs/VALIDATION.md` | Flagship endurance methodology |
 | 10 | `docs/SNAPSHOT_UTC.txt` | When this pack’s docs were copied |
+| 11 | `../SENSOR_TRUTH.md` | MQ-135 physics + characterization protocol (repo root) |
 
 Repo root (parent of this folder) holds the full engine: `open_smell2.py`, bio-sim, tests.
 

@@ -50,7 +50,7 @@ Status date: **2026-07-19**. Only measured work is listed as done.
 
 | # | Move | Goal |
 |---|------|------|
-| **1** | **Sensor truth** | Known mixtures / calibration protocol; honest MQ-135-class proxy map (not species fantasy) |
+| **1** | **Sensor truth** | In progress — see [`SENSOR_TRUTH.md`](./SENSOR_TRUTH.md) (MQ-135 physics, L1–L3 protocol) |
 | **2** | **License lock** | Resolve Apache file vs Sovereign README (`LICENSE_CLARITY.md`) before any MoU |
 | **3** | **Lab / IRB outreach** | Ship `NOTICE_PACKAGE/` to people who can run real bio; non-diagnostic protocols |
 | **4** | **Regulatory spine** | Counsel on Q-Sub / risk file; still **not** “FDA approved” |
@@ -186,6 +186,7 @@ pip install pyserial colorama
 | [`LICENSE_CLARITY.md`](./LICENSE_CLARITY.md) | License instrument decision still open |
 | [`ARCHIVE_POLICY.md`](./ARCHIVE_POLICY.md) | Never erase the past |
 | [`regulatory/`](./regulatory/) | Q-Sub / risk / labeling **drafts** |
+| [`SENSOR_TRUTH.md`](./SENSOR_TRUTH.md) | MQ-135 research: physics, proxy map, L1–L3 experiments |
 
 ---
 
