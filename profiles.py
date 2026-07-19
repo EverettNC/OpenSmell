@@ -1,7 +1,7 @@
 """
 OpenSmell Scent Profile Database + Translation Engine
-Condensed core set (expandable to 2401+). Logic adapted from opensmell_test_loop.py
-for VOC classification, anomaly detection, and alert translation.
+Legacy condensed set. Production live inventory: 21 profiles in open_smell2.py
+(see opensmell_engine_truth.json). Do not cite this file for profile counts.
 """
 
 from typing import Any, Dict, List, Optional

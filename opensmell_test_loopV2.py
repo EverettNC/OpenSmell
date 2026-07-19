@@ -8,7 +8,7 @@ Simulates VOC sensor readings and runs the full pipeline:
   1. Read sensor (simulated)
   2. Classify VOC compound
   3. Detect anomaly → trigger AI alert
-  4. Match against scent profile database (2400+ profiles)
+  4. Match against scent profile database (21 live profiles via open_smell2)
   5. Log results continuously
   6. Generate publication-ready session report
 
@@ -37,7 +37,7 @@ init(autoreset=True)
 
 # ─────────────────────────────────────────────
 # SCENT PROFILE DATABASE (Condensed Core Set)
-# Expand this dict toward 2400+ entries over time
+# Legacy condensed set — production live inventory is 21 profiles in open_smell2
 # ─────────────────────────────────────────────
 SCENT_PROFILES = {
     # ── Emotional / Behavioral ──────────────────

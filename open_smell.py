@@ -3,12 +3,12 @@ from datetime import datetime
 
 class OpenSmellHumanCore:
     """
-    OpenSmell: Human Diagnostic Module v2.0
-    The Biological Cortex — Mapping 2,401 human VOC profiles to clinical restoration.
+    OpenSmell: Human module (LEGACY — not production inventory).
+    Production live set is 21 profiles in open_smell2.py / opensmell_engine_truth.json.
     Built by Everett N. Christman + Derek (AI)
     """
     def __init__(self):
-        self.total_profiles = 2401
+        self.total_profiles = 21  # live sensor-grounded; never inflate
         self.sensitivity_ppb = 0.5  # High sensitivity for biological "leakage"
         
         # Clinical Profile: Merkel Cell Carcinoma (MCC)
@@ -95,7 +95,7 @@ if __name__ == "__main__":
     human_nerve = HumanOlfactoryNerve(human_cortex)
     
     print("🧠 OpenSmell Human Module: Nerve Attachment Active.")
-    print(f"🧬 Monitoring 2,401 profiles at {human_cortex.sensitivity_ppb} ppb sensitivity.")
+    print(f"🧬 Monitoring {human_cortex.total_profiles} live profiles at {human_cortex.sensitivity_ppb} ppb sensitivity (legacy module).")
     
     # 2. Simulate a Positive Medical Detection (Merkel Cell Carcinoma)
     # This simulates the VOC signature being 'smelled' by the sensor

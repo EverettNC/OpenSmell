@@ -12,10 +12,11 @@ import numpy as np
 class OpenSmellHumanCore:
     """
     Processes raw VOC arrays from breath or skin contact.
-    Maps to 2,401 profiles with focus on clinical alerts.
+    LEGACY module — production inventory is 21 live profiles (open_smell2).
+    Screening-support only. Not for diagnosis.
     """
     def __init__(self):
-        self.total_profiles = 2401
+        self.total_profiles = 21  # live sensor-grounded; never inflate
         self.sensitivity_ppb = 0.5
         
         # Example high-priority profile

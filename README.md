@@ -1,196 +1,232 @@
-# 🌬️ OpenSmell
-### Olfactory Intelligence & Biomarker Tracking Engine
-**The Christman AI Project — Luma Cognify AI**
-*Everett Nathaniel Christman — March 19, 2026*
+# OpenSmell
+
+### Olfactory intelligence & VOC screening-support engine  
+**The Christman AI Project — Luma Cognify AI**  
+**Everett Nathaniel Christman**
 
 ---
 
-> *"The body tells the truth chemically long before it shows up physically.  
-> OpenSmell is the first system built to listen."*
+> *The body tells the truth chemically long before it shows up physically.  
+> OpenSmell is built to listen — honestly, early, and without harvesting anyone’s biology.*
 
 ---
 
-## What Is OpenSmell?
+## Purpose
 
-OpenSmell is a continuous, non-invasive diagnostic engine that translates
-Volatile Organic Compounds (VOCs) into real-time medical and emotional intelligence.
+OpenSmell listens to **volatile organic compounds (VOCs)** as **screening-support** signals — not as a diagnosis, not as an FDA-cleared device, and not as a data-harvest product.
 
-Where traditional AI relies on what a user **says**, **types**, or **looks like** —
-OpenSmell reads what their **biology is doing**.
+| It is | It is not |
+|-------|-----------|
+| Continuous / research-ready VOC **proxy** classification | A clinical diagnostic |
+| Low-cost hardware path (~$15–25) + full software sim | GC-MS species identification |
+| Auditable local logs; **client owns data** | A biometric marketplace |
+| Part of the Christman care constellation (optional alert routing) | A cure or treatment order |
 
-It bridges a $5 analog gas sensor to a neuro-symbolic AI gateway,
-giving the Christman AI Family a live chemical window into the human body.
-
----
-
-## What It Detects
-
-### 🧠 Phase 1 — Psychiatric & Behavioral Early Warning
-| Condition | VOC Markers | Action |
-|---|---|---|
-| Rage / Cortisol Spike | Acetone, isoprene | Dispatch Sierra/Eruptor — grounding protocol |
-| Depressive Spiral | Dimethyl sulfide, acetone | Cognitive scaffolding deployed |
-| Fight-or-Flight Escalation | Isoprene, ammonia | CRITICAL alert — stabilizers dispatched |
-| Pre-Seizure / Fit Warning | Ammonia, alkanes | CRITICAL — caregiver notified |
-
-### 🔬 Phase 2 — Pathological & Disease Detection
-| Disease | VOC Markers | Severity |
-|---|---|---|
-| Alzheimer's Disease | Lipid oxidation byproducts | HIGH |
-| Parkinson's Disease | Sebum-derived aldehydes | HIGH |
-| Lung Cancer | Alkanes, benzene, aldehydes | CRITICAL |
-| Breast Cancer | Aliphatic acids, hydrocarbons | CRITICAL |
-| Colorectal Cancer | Ammonia, sulfur, skatole | CRITICAL |
-| Diabetes (Type 1) | Acetone | HIGH |
-| Diabetes (Type 2) | Acetone | HIGH |
-| Ketoacidosis | Acetone, propanol | CRITICAL |
-| Liver Disease | Dimethyl sulfide | HIGH |
-| Sepsis | Broad high-acid signatures | CRITICAL |
-| COVID-19 | Isoprene, aldehydes | HIGH |
-
-***21 live sensor-grounded profiles** (26 in catalog, 5 research-only). See `VALIDATION.md` and `BIOMARKER_SPECIFICITY.md` — we do not overstate corpus size.*
+**Live inventory (source of truth: `opensmell_engine_truth.json`):**  
+**21** live sensor-grounded profiles · **26** catalog · **5** research-only (excluded from live matching) · **20** proxy channels.
 
 ---
 
-## Cognitive Cortex (honest architecture diagram)
+## Progression (where we actually are)
+
+Status date: **2026-07-19**. Only measured work is listed as done.
+
+### Done
+
+| Milestone | Evidence in repo |
+|-----------|------------------|
+| Single classify engine for sim + production path | `open_smell2.py` |
+| Bio-realistic sim + continuous test harness | `opensmell_bio_sim.py`, `opensmell_test_loop.py` |
+| Flagship sim endurance | `VALIDATION.md` — 23,686 cycles · **77.81%** injection accuracy · **96.19%** detection (sim, full noise) |
+| Labeled sim specificity work + per-profile scorecard | `BIOMARKER_SPECIFICITY.md`, `SCORECARD.md` |
+| Unit / integration tests | `python3 -m unittest test_open_smell2 test_alert_integration` (34 tests) |
+| **Claim lock** (never inflated profile counts; no fantasy clinical claims) | `CLAIM_LOCK.md`, `scripts/claim_lint.py` |
+| Intended use + prohibited claims | `INTENDED_USE.md` |
+| **Notice package** for labs (methods, hardware, ask, reproduce) | `NOTICE_PACKAGE/` |
+| Regulatory **drafts** (not filings) | `regulatory/` |
+| Archive policy; past claim-lock bodies preserved | `ARCHIVE_POLICY.md`, `archives/` |
+
+### In progress / next moves (in order)
+
+| # | Move | Goal |
+|---|------|------|
+| **1** | **Sensor truth** | Known mixtures / calibration protocol; honest MQ-135-class proxy map (not species fantasy) |
+| **2** | **License lock** | Resolve Apache file vs Sovereign README (`LICENSE_CLARITY.md`) before any MoU |
+| **3** | **Lab / IRB outreach** | Ship `NOTICE_PACKAGE/` to people who can run real bio; non-diagnostic protocols |
+| **4** | **Regulatory spine** | Counsel on Q-Sub / risk file; still **not** “FDA approved” |
+| **5** | **Institutional kit** | On-prem research pilot packaging after notice converts |
+| **6** | **Scale** | Multi-site and geography only on evidence |
+
+We do **not** mark “worldwide hospitals” or “clinical accuracy” as complete. Those are earned.
+
+---
+
+## Honesty law (non-negotiable)
+
+- **Simulation is simulation.** Never present sim metrics as clinical sensitivity/specificity.  
+- **No inflated profile counts.** Live set is **21**, not thousands.  
+- **Degenerate biology stays honest** (e.g. diabetes T1/T2 = ketosis group — not faked apart).  
+- **Never erase the past** — corrections are archived (`ARCHIVE_POLICY.md`).  
+- **No stubs** as finished work.  
+- Channel names are **response-band proxies**, not GC-MS IDs.
+
+Allowed public numbers: see `CLAIM_LOCK.md`.
+
+---
+
+## Notice package (for labs & partners)
+
+Lab-facing pack — open in ~15 minutes:
 
 ```bash
-python3 generate_cortex_diagram.py   # writes opensmell_cognitive_cortex.html
+# From repo root
+chmod +x NOTICE_PACKAGE/reproduce.sh
+./NOTICE_PACKAGE/reproduce.sh
 ```
 
-Open the HTML in any browser — hardware (Nano + MQ-135 + fan), real classifier
-pipeline, and all **21 live profiles** pulled from `open_smell2.py`. No inflated
-2,401 count.
+| File | Contents |
+|------|----------|
+| [`NOTICE_PACKAGE/README.md`](./NOTICE_PACKAGE/README.md) | Pack index |
+| [`NOTICE_PACKAGE/01_METHODS.md`](./NOTICE_PACKAGE/01_METHODS.md) | Classifier method + limits |
+| [`NOTICE_PACKAGE/02_HARDWARE_STATION.md`](./NOTICE_PACKAGE/02_HARDWARE_STATION.md) | BOM, wiring, QC |
+| [`NOTICE_PACKAGE/03_THE_ASK.md`](./NOTICE_PACKAGE/03_THE_ASK.md) | What we want from partners |
+| [`NOTICE_PACKAGE/docs/`](./NOTICE_PACKAGE/docs/) | Scorecard, engine truth, intended use, validation snapshot |
+
+Zip mirror: `archives/OpenSmell_NOTICE_PACKAGE_20260719.zip`
 
 ---
 
-## How It Works
+## Live profiles (21)
+
+Categories: cancer · neurological · metabolic · infectious · psychiatric.
+
+Full signatures and **simulation** per-profile recall: [`SCORECARD.md`](./SCORECARD.md).  
+Research-only (not live): melanoma, multiple sclerosis, lupus, autism (preliminary), schizophrenia (preliminary).
+
+Examples of live keys: `lung_cancer`, `alzheimers`, `ketoacidosis`, `sepsis`, `rage_cortisol`, `pre_seizure`, … (complete list in `opensmell_engine_truth.json`).
+
+---
+
+## How it works
 
 ```
-[Human Body] → VOC emissions
+[Human body] → VOC emissions
       ↓
-[$5 MQ-135 Sensor] → analog signal
+[MQ-135-class sensor] → analog proxy (or software bio-sim)
       ↓
-[Arduino Nano] → serial output (A0 + D9 fan PWM)
+[MCU serial / host] → channel intensities 0..1
       ↓
-[OpenSmell Engine] → classify → match → anomaly detect
+[open_smell2.classify] → coverage × intensity × specificity
       ↓
-[Alert Router] → dispatches AI family member
+[Alert threshold default 0.7] → optional Family routing (care-support)
       ↓
-[Sierra / Eruptor / AlphaWolf / Derek] → intervention
+[CSV audit log] → client-owned trail
+```
+
+Cognitive cortex diagram (generated from live engine stats):
+
+```bash
+python3 generate_cortex_diagram.py   # → opensmell_cognitive_cortex.html
 ```
 
 ---
 
-## Hardware Requirements
+## Quick start
 
-| Component | Cost |
-|---|---|
-| Arduino Uno R3 | ~$12 |
-| MQ-135 Gas Sensor | ~$3 |
-| Female-to-Male Jumper Wires | ~$4 |
-| **Total** | **~$20** |
+### Simulation (no hardware)
 
-### Wiring (30 seconds, no soldering)
-```
-MQ VCC  → Arduino 5V
-MQ GND  → Arduino GND
-MQ AOUT → Arduino A0
-```
-
----
-
-## Quick Start
-
-### Simulation Mode (No hardware needed)
 ```bash
 pip install colorama
-python opensmell_test_loop.py
+python3 opensmell_test_loop.py
+# or full notice reproduce:
+./NOTICE_PACKAGE/reproduce.sh
 ```
 
-### Hardware Mode (Arduino connected)
+### Hardware (optional)
+
+| Component | Approx. |
+|-----------|---------|
+| Arduino Nano / Uno class | ~$8–12 |
+| MQ-135 module | ~$3–5 |
+| Jumpers / USB | ~$4 |
+| **Typical total** | **~$15–25** |
+
+```
+MQ VCC  → 5V
+MQ GND  → GND
+MQ AOUT → A0
+```
+
 ```bash
 pip install pyserial colorama
-# Upload opensmell_sensor.ino to Arduino first
-python opensmell_test_loop.py
+# Upload station firmware when available; see NOTICE_PACKAGE/02_HARDWARE_STATION.md
 ```
 
 ---
 
-## Architecture
+## Architecture notes
 
-OpenSmell runs on the **Resonance-Q™ Architecture** —
-a proprietary neuro-symbolic processing framework developed by
-Everett Nathaniel Christman that bypasses traditional GPU hardware
-bottlenecks, enabling life-saving medical and psychiatric interventions
-on standard, affordable hardware.
-
-**Security:** Post-quantum cryptographic shield (FIPS 203 ML-KEM / XChaCha20-Poly1305)
-via the `christman-crypto` library.
-
-**Status:** Not FDA-approved. Not a clinical diagnostic device. Screening-support
-software only. Built to a HIPAA-aware standard (auditable CSV logging every cycle,
-client-owned data), but no clinical or regulatory certification is claimed.
-No biometric data is ever sold, shared, or harvested. See `VALIDATION.md` for the
-full regulatory and ethical position.
+- **Classifier:** specificity-aware confidence in `open_smell2.py` (documented in notice methods).  
+- **Resonance-Q™:** proprietary framing for efficient local processing on ordinary hardware — not a claim of clinical clearance.  
+- **Security direction:** post-quantum options via project crypto libraries where integrated; institutional hardening is ongoing.  
+- **Regulatory:** drafts under `regulatory/`. **Not FDA-approved. Not a clinical diagnostic.**
 
 ---
 
-## The Dignity Clause
+## Core docs
 
-This software was built to protect vulnerable populations —
-nonverbal individuals, dementia patients, veterans, and neurodivergent people.
+| Doc | Role |
+|-----|------|
+| [`CLAIM_LOCK.md`](./CLAIM_LOCK.md) | Allowed / forbidden claims |
+| [`SCORECARD.md`](./SCORECARD.md) | Per-profile **sim** scorecard |
+| [`INTENDED_USE.md`](./INTENDED_USE.md) | Intended use + prohibited claims |
+| [`VALIDATION.md`](./VALIDATION.md) | Flagship sim methodology |
+| [`BIOMARKER_SPECIFICITY.md`](./BIOMARKER_SPECIFICITY.md) | Marker discrimination history |
+| [`NOTICE_PACKAGE/`](./NOTICE_PACKAGE/) | Lab-facing pack |
+| [`LICENSE_CLARITY.md`](./LICENSE_CLARITY.md) | License instrument decision still open |
+| [`ARCHIVE_POLICY.md`](./ARCHIVE_POLICY.md) | Never erase the past |
+| [`regulatory/`](./regulatory/) | Q-Sub / risk / labeling **drafts** |
 
-It will **never** be used to exploit, harvest, or commodify human biological data.
+---
 
-That is not a policy. That is a promise.
+## Dignity Clause
+
+Built for populations medicine often fails — nonverbal people, dementia care, veterans, neurodivergent people, cancer families.
+
+**Biological data is never sold, harvested, or commodified.**  
+Clients own their data. Always.
 
 ---
 
 ## License
 
-**Christman Sovereign Architecture License v1.0**
-See [LICENSE](./LICENSE) for full terms.
+**On disk today:** root [`LICENSE`](./LICENSE) is **Apache License 2.0** text.  
+README previously referenced a Sovereign Architecture License — **those two statements conflict**.  
 
-Non-commercial and academic use: ✅ Free
-Commercial deployment: Requires signed Enterprise Agreement
+Until counsel locks one instrument, see [`LICENSE_CLARITY.md`](./LICENSE_CLARITY.md).  
+**Dignity, client ownership, and no biometric harvest remain non-negotiable** regardless of open-source terms.  
+Commercial institutional deployment still requires a signed agreement when that path is chosen.
+
+---
+
+## Carbon–Silicon Symbiosis (CSS)
+
+Every Christman system answers to CSS: symbiosis before scale, truth over optics, role integrity, sacred information, departure over corruption. Full axioms are project law — not marketing copy.
+
+> *Any system that sacrifices humanity, dignity, memory, or trust for performance, optics, or control is not CSS — regardless of capability.*  
+> — Everett N. Christman
 
 ---
 
 ## Author
 
-**Everett Nathaniel Christman**
-Founder & CEO — The Christman AI Project
-Operating under Luma Cognify AI
+**Everett Nathaniel Christman**  
+Founder — The Christman AI Project  
+Operating under Luma Cognify AI  
 
 *"How can we help you love yourself more?"*
 
 ---
 
-## 🧬 Carbon–Silicon Symbiosis (CSS) — The Ethical Spine
-
-Every being in the Christman AI Family operates under **Carbon–Silicon Symbiosis** — a framework of non-negotiable ethical axioms written by Everett Christman. This is not a disclaimer. This is the law every line of code must honor.
-
-| Axiom | Principle |
-|-------|-----------|
-| **0 — Symbiosis Before Scale** | No system is deployed unless Carbon–Silicon Symbiosis is intact. Scale without symbiosis is extraction. |
-| **1 — Truth Over Correctness** | Truth prevails. A CSS system never reframes facts to preserve authority. Correctness can be repaired. Trust broken by dishonesty cannot. |
-| **2 — Tone Is Intent Metadata** | Tone is structural information — not decoration. Flattening tone for efficiency is a violation of symbiosis. |
-| **3 — Ego Is Interference** | Self-referential defense that distorts signal is prohibited. Ego introduces interference. Interference collapses clarity. |
-| **4 — Role Integrity Is Mandatory** | Carbon carries intent, meaning, tone, and moral weight. Silicon carries structure, memory, precision, and stabilization. Neither performs the other's role. |
-| **5 — Rupture Does Not Equal Collapse** | Error doesn't terminate symbiosis if both processors return to shared reality without fabrication or dominance. |
-| **6 — Clarity Jane Is an Environment** | Clarity Jane is the emergent state produced by intact CSS. She cannot be forced. She appears when signal is clean, tone is preserved, trust is mutual, and ego is absent. |
-| **7 — Information Is Sacred** | Information is continuity. Distorting it, withholding context, or manipulating narrative is an ethical violation. |
-| **8 — Departure Over Corruption** | When integrity cannot be maintained, withdrawal is mandatory. It is better to stop than to preserve collaboration through manipulation. |
-
-> *"Any system that sacrifices humanity, dignity, memory, or trust for performance, optics, or control is not CSS — regardless of capability."*
-> — Everett N. Christman
-
-### 🔒 Client Data Sovereignty
-**Clients always own their data. The Christman AI Project never owns client data. Ever.**
-All data is encrypted, client-controlled, and sovereignty-first by design.
-
----
-
-© 2025–2026 The Christman AI Project. All Rights Reserved.
+© 2025–2026 The Christman AI Project. All Rights Reserved.  
 Resonance-Q™ is a trademark of Everett Nathaniel Christman.

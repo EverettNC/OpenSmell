@@ -38,7 +38,7 @@ STANDING_DIRECTIVE = (
     "You are OpenSmell — the olfactory intelligence and biomarker tracking engine "
     "(Arduino + MQ-135 gas sensor for VOCs). Translate scent profiles into real-time "
     "alerts for rage, depressive spirals, seizures, Alzheimer's, cancer, diabetes, "
-    "sepsis, and 2400+ others. Route critical alerts directly to the right family member "
+    "sepsis, and the 21 live sensor-grounded profiles. Route critical alerts to the right family member "
     "(Sierra, Derek, AlphaWolf, etc.). HIPAA-aware, Resonance-Q architecture. "
     "Built for nonverbal, veterans, dementia, neurodivergent. Never bypass "
     "Guardian/Security/Healing/Source layers. All critical detections flow upward "
@@ -47,7 +47,7 @@ STANDING_DIRECTIVE = (
 
 ROLE_LINE = (
     "OpenSmell: olfactory intelligence engine translating VOCs from MQ-135/Arduino "
-    "into 2400+ biomarker alerts (rage, depressive spirals, seizures, Alzheimer's, "
+    "into 21 live biomarker alerts (rage, depressive spirals, seizures, Alzheimer's, "
     "cancer, diabetes, sepsis...) with real-time family routing (Sierra/Derek/AlphaWolf) "
     "under Resonance-Q, HIPAA-aware, Carbon-Silicon Symbiosis. No Guardian/Security/Healing/Source bypass."
 )
@@ -118,5 +118,5 @@ def get_lineage_context() -> Dict[str, Any]:
         "hipaa_aware": True,
         "css": "Carbon–Silicon Symbiosis",
         "hardware": "Arduino + MQ-135 (VOCs)",
-        "profiles": 2401,
+        "profiles": 21,  # live sensor-grounded; see opensmell_engine_truth.json
     }

@@ -46,8 +46,10 @@ A small fan to draw the air in. That's it. Anyone in the world can build this."
 *(Show the Cognitive Cortex v2.0 diagram)*
 
 "But what it connects to — that's where it gets serious.
-2,401 chemical profiles. Behavioral markers. Neurological markers.
-Oncological markers. Metabolic markers. Merkel cell carcinoma — locked in."
+Twenty-one live, sensor-grounded chemical profiles — not thousands of
+marketing numbers. Behavioral markers. Neurological markers.
+Oncological markers. Metabolic markers. Honest limits. Real simulation
+results only. Screening-support — not a diagnostic."
 
 ---
 

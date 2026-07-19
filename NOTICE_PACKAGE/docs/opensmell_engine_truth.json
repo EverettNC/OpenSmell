@@ -1,0 +1,275 @@
+{
+  "metrics": {
+    "catalog_profiles": 26,
+    "live_profiles": 21,
+    "research_only": 5,
+    "sensor_channels": 20,
+    "marker_aliases": 23,
+    "alert_threshold_default": 0.7,
+    "synthetic_separability_exact": "87.2%",
+    "synthetic_separability_note": "Bio-sim labeled closed-loop (seed=42). Not clinical accuracy.",
+    "conf_correctness": "+0.42",
+    "false_alert_background": "~0% @ 0.7"
+  },
+  "profiles": [
+    {
+      "key": "alzheimers",
+      "condition": "Alzheimer's Disease",
+      "category": "neurological",
+      "severity": "high",
+      "channels": [
+        "lipid_oxidation"
+      ],
+      "n": 1
+    },
+    {
+      "key": "bladder_cancer",
+      "condition": "Bladder Cancer",
+      "category": "cancer",
+      "severity": "critical",
+      "channels": [
+        "alkanes",
+        "benzene"
+      ],
+      "n": 2
+    },
+    {
+      "key": "breast_cancer",
+      "condition": "Breast Cancer",
+      "category": "cancer",
+      "severity": "critical",
+      "channels": [
+        "aliphatic_acids",
+        "hydrocarbons"
+      ],
+      "n": 2
+    },
+    {
+      "key": "c_diff",
+      "condition": "C. difficile",
+      "category": "infectious",
+      "severity": "high",
+      "channels": [
+        "aliphatic_acids",
+        "propanol",
+        "skatole"
+      ],
+      "n": 3
+    },
+    {
+      "key": "colorectal_cancer",
+      "condition": "Colorectal Cancer",
+      "category": "cancer",
+      "severity": "critical",
+      "channels": [
+        "ammonia",
+        "sulfur",
+        "skatole"
+      ],
+      "n": 3
+    },
+    {
+      "key": "covid19",
+      "condition": "COVID-19",
+      "category": "infectious",
+      "severity": "high",
+      "channels": [
+        "isoprene",
+        "aldehydes"
+      ],
+      "n": 2
+    },
+    {
+      "key": "depressive_spiral",
+      "condition": "Depressive Spiral",
+      "category": "psychiatric",
+      "severity": "high",
+      "channels": [
+        "dimethyl_sulfide",
+        "acetone"
+      ],
+      "n": 2
+    },
+    {
+      "key": "diabetes_type1",
+      "condition": "Diabetes (Type 1)",
+      "category": "metabolic",
+      "severity": "high",
+      "channels": [
+        "acetone"
+      ],
+      "n": 1
+    },
+    {
+      "key": "diabetes_type2",
+      "condition": "Diabetes (Type 2)",
+      "category": "metabolic",
+      "severity": "high",
+      "channels": [
+        "acetone"
+      ],
+      "n": 1
+    },
+    {
+      "key": "fight_or_flight",
+      "condition": "Fight-or-Flight Escalation",
+      "category": "psychiatric",
+      "severity": "critical",
+      "channels": [
+        "isoprene",
+        "ammonia"
+      ],
+      "n": 2
+    },
+    {
+      "key": "ketoacidosis",
+      "condition": "Ketoacidosis",
+      "category": "metabolic",
+      "severity": "critical",
+      "channels": [
+        "acetone",
+        "propanol"
+      ],
+      "n": 2
+    },
+    {
+      "key": "liver_disease",
+      "condition": "Liver Disease",
+      "category": "metabolic",
+      "severity": "high",
+      "channels": [
+        "dimethyl_sulfide"
+      ],
+      "n": 1
+    },
+    {
+      "key": "lung_cancer",
+      "condition": "Lung Cancer",
+      "category": "cancer",
+      "severity": "critical",
+      "channels": [
+        "alkanes",
+        "benzene",
+        "aldehydes"
+      ],
+      "n": 3
+    },
+    {
+      "key": "ovarian_cancer",
+      "condition": "Ovarian Cancer",
+      "category": "cancer",
+      "severity": "critical",
+      "channels": [
+        "aldehydes",
+        "hydrocarbons"
+      ],
+      "n": 2
+    },
+    {
+      "key": "parkinsons",
+      "condition": "Parkinson's Disease",
+      "category": "neurological",
+      "severity": "high",
+      "channels": [
+        "sebum_vocs",
+        "aldehydes"
+      ],
+      "n": 2
+    },
+    {
+      "key": "pre_seizure",
+      "condition": "Pre-Seizure / Fit Warning",
+      "category": "psychiatric",
+      "severity": "critical",
+      "channels": [
+        "ammonia",
+        "alkanes"
+      ],
+      "n": 2
+    },
+    {
+      "key": "prostate_cancer",
+      "condition": "Prostate Cancer",
+      "category": "cancer",
+      "severity": "critical",
+      "channels": [
+        "aldehydes",
+        "ketones"
+      ],
+      "n": 2
+    },
+    {
+      "key": "rage_cortisol",
+      "condition": "Rage / Cortisol Spike",
+      "category": "psychiatric",
+      "severity": "high",
+      "channels": [
+        "acetone",
+        "isoprene"
+      ],
+      "n": 2
+    },
+    {
+      "key": "renal_failure",
+      "condition": "Renal Failure",
+      "category": "metabolic",
+      "severity": "critical",
+      "channels": [
+        "ammonia",
+        "dimethyl_sulfide",
+        "toluene"
+      ],
+      "n": 3
+    },
+    {
+      "key": "sepsis",
+      "condition": "Sepsis",
+      "category": "infectious",
+      "severity": "critical",
+      "channels": [
+        "aliphatic_acids",
+        "ammonia",
+        "dimethyl_sulfide"
+      ],
+      "n": 3
+    },
+    {
+      "key": "tuberculosis",
+      "condition": "Tuberculosis",
+      "category": "infectious",
+      "severity": "critical",
+      "channels": [
+        "alkanes"
+      ],
+      "n": 1
+    }
+  ],
+  "degenerate_groups": {
+    "diabetes_ketosis": [
+      "diabetes_type1",
+      "diabetes_type2"
+    ]
+  },
+  "sensor_channels": [
+    "acetone",
+    "isoprene",
+    "ammonia",
+    "benzene",
+    "alkanes",
+    "aldehydes",
+    "hydrocarbons",
+    "dimethyl_sulfide",
+    "sulfur",
+    "aliphatic_acids",
+    "skatole",
+    "ketones",
+    "sebum_vocs",
+    "lipid_oxidation",
+    "ethanol_trace",
+    "toluene",
+    "ethane",
+    "propanol",
+    "butane",
+    "methane_trace"
+  ]
+}
